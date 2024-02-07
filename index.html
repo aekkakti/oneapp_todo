@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="js/vue.js"></script>
+    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="css/assets.css">
+    <title>TODO</title>
+</head>
+<body>
+
+<div id="todo">
+    <div class="columns">
+        <div class="column">
+            <h2 class="t-a-c">Принято в работу</h2>
+            <button @click="removeFromLocalStorage" class="clearTODO">Удалить все карточки</button><br><br>
+            <input v-model="name" type="text" class="addCardInput"><br><br>
+            <button @click="addCard(name)" class="addCardButton">Добавить карточку</button>
+            <ul>
+                <li v-for="(card, index) in column1Cards">
+                    <p>{{ card.name }}</p>
+                    <list :tasks="card.tasks" @add-task="addTask(index, $event)" @complete-task="completeTask(index, $event)"></list>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <h2 class="t-a-c">В моменте</h2>
+            <ul>
+                <li v-for="(card, index) in column2Cards">
+                    <p>{{ card.name }}</p>
+                    <list :tasks="card.tasks" @add-task="addTask(index, $event)" @complete-task="completeTask(index, $event)"></list>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <h2 class="t-a-c">Выполнено</h2>
+            <ul>
+                <li v-for="(card, index) in column3Cards">
+                    <p>{{ card.name }}</p>
+                    <list :tasks="card.tasks" @add-task="addTask(index, $event)" @complete-task="completeTask(index, $event)"></list>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

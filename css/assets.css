@@ -1,0 +1,50 @@
+#todo {
+    padding-left: 5px;
+    border: 1px solid black;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    grid-column-gap: 75px;
+}
+
+button {
+    font-size: 12pt;
+    background-color: blue;
+    color: white;
+    border-radius: 10%;
+    border: none;
+    cursor: pointer;
+}
+
+.fs-32pt {
+    font-size: 32pt;
+}
+
+.t-a-c {
+    text-align: center;
+}
+
+.completeStyle {
+    text-decoration: line-through;
+    color: red;
+}
+
+.completeStyle:hover {
+    cursor: pointer;
+}
+
+.clearTODO {
+    width: 130px;
+    height: 50px;
+    background-color: red;
+}
+
+.addCardInput {
+    width: 200px;
+    height: 30px;
+}
+
+.addCardButton {
+    width: 150px;
+    height: 50px;
+}
