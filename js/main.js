@@ -2,10 +2,12 @@ new Vue({
     el: '#todo',
     data: {
         cards: [],
+        tasks: [],
         column1Cards: [],
         column2Cards: [],
         column3Cards: [],
         name: '',
+        newTask: '',
         countCards: 0,
         completeTaskPercent: 0
     },

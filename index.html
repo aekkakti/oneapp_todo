@@ -18,11 +18,17 @@
             <h2 class="t-a-c">Принято в работу</h2>
             <input v-model="name" type="text" class="addCardInput"><br><br>
             <button @click="addCard(name)" class="addCardButton">Добавить карточку</button>
+
             <ul>
                 <li v-for="(card, index) in column1Cards">
                     <p>{{ card.name }}</p>
-                    <list :tasks="card.tasks" @add-task="addTask(index, $event)" @complete-task="completeTask(index, $event)"></list>
+                    <input v-model="newTask" type="text">
+                    <button @click="addTask">Добавить задачу</button>
                 </li>
+                <li v-for="(task, index) in tasks" :key="index">
+                    <p :class="{'completeStyle' : task.completeStyle}" @click="completeTask(index)">{{task.name}}</p>
+                </li>
+
             </ul>
         </div>
 
