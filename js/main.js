@@ -1,38 +1,48 @@
 new Vue({
     el: '#todo',
     data: {
-        cards: [],
-        tasks: [],
         column1Cards: [],
         column2Cards: [],
         column3Cards: [],
-        name: '',
-        newTask: '',
+        cardName: '',
+        taskName: '',
         countCards: 0,
+        countTasks: 0,
         completeTaskPercent: 0
     },
     methods: {
         addCard() {
-            if (this.countCards < 3 && this.name !== '') {
-                let newCard = {name: this.name, tasks: []}
+            if (this.countCards < 3 && this.cardName !== '') {
+                let newCard = {cardName: this.cardName, tasks: [], taskName: ''}
                 this.column1Cards.push(newCard)
                 this.countCards += 1
             }
-            else if (this.name === '') {
+            else if (this.cardName === '') {
                 alert('Нельзя создавать пустую карточку!')
             }
             else {
                 alert('Максимум можно добавить только 3 карточки!')
             }
         },
-        addTask(cardIndex, newTask) {
-            this.cards[cardIndex].tasks.push(newTask);
-            console.log(this.cards)
+        addTask(cardIndex) {
+            if (this.column1Cards[cardIndex].taskName !== '' && (this.countTasks < 3 || this.countTasks < 5)) {
+                let newTask = {taskName: this.column1Cards[cardIndex].taskName, completeStyle: false}
+                this.column1Cards[cardIndex].tasks.push(newTask)
+                this.column1Cards[cardIndex].taskName = ''
+                this.countTasks += 1
+            }
+            else if (this.column1Cards[cardIndex].taskName === '') {
+                alert('Нельзя создавать пустую задачу!')
+            }
+            else {
+                alert('Максимум можно добавить только 5 задач!')
+            }
         },
-        completeTask(cardIndex, taskIndex) {
-            this.cards[cardIndex].tasks[taskIndex].completeStyle = !this.cards[cardIndex].tasks[taskIndex].completeStyle
-            const completedTasks = this.cards[cardIndex].tasks.filter(task => task.completeStyle)
-            this.completeTaskPercent = 100 / this.cards[cardIndex].tasks.length * completedTasks.length
+        completeTask(newCard, cardIndex, taskIndex) {
+            newCard.tasks[taskIndex].completeStyle =  !newCard.tasks[taskIndex].completeStyle
+            const completedTasks = newCard.tasks.filter(task => task.completeStyle)
+            this.completeTaskPercent = 100 / newCard.tasks.length * completedTasks.length
+            console.log(this.completeTaskPercent)
         },
     }
 })

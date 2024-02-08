@@ -16,20 +16,17 @@
     <div class="columns">
         <div class="column">
             <h2 class="t-a-c">Принято в работу</h2>
-            <input v-model="name" type="text" class="addCardInput"><br><br>
-            <button @click="addCard(name)" class="addCardButton">Добавить карточку</button>
+            <input v-model="cardName" type="text" class="addCardInput"><br><br>
+            <button @click="addCard()" class="addCardButton">Добавить карточку</button>
 
-            <ul>
-                <li v-for="(card, index) in column1Cards">
-                    <p>{{ card.name }}</p>
-                    <input v-model="newTask" type="text">
-                    <button @click="addTask">Добавить задачу</button>
-                </li>
-                <li v-for="(task, index) in tasks" :key="index">
-                    <p :class="{'completeStyle' : task.completeStyle}" @click="completeTask(index)">{{task.name}}</p>
-                </li>
-
-            </ul>
+                <div v-for="(newCard, index) in this.column1Cards">
+                    <p>{{newCard.cardName}}</p>
+                    <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
+                        <span @click="completeTask(newCard, taskIndex, index)" :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
+                    </li>
+                    <input v-model="newCard.taskName" type="text">
+                    <button @click="addTask(index)">Добавить задачу</button>
+                </div>
         </div>
 
         <div class="column">
@@ -41,7 +38,6 @@
         </div>
 
     </div>
-
 </div>
 
 </body>
