@@ -9,7 +9,7 @@ new Vue({
         countColumnCard1: 0,
         countColumnCard2: 0,
         countTasks: 0,
-        completeTaskPercent: 0
+        completeTaskPercent: 0,
     },
     methods: {
         addCard() {
@@ -17,6 +17,7 @@ new Vue({
                 let newCard = {cardName: this.cardName, tasks: [], taskName: ''}
                 this.column1Cards.push(newCard)
                 this.countColumnCard1 += 1
+                this.saveDataToLocalStorage()
             }
             else if (this.cardName === '') {
                 alert('Нельзя создавать пустую карточку!')
@@ -31,6 +32,7 @@ new Vue({
                 this.column1Cards[cardIndex].tasks.push(newTask)
                 this.column1Cards[cardIndex].taskName = ''
                 this.countColumnCard1 += 1
+                this.saveDataToLocalStorage()
             }
             else if (this.column1Cards[cardIndex].taskName === '') {
                 alert('Нельзя создавать пустую задачу!')
@@ -53,7 +55,27 @@ new Vue({
                 this.column3Cards.push(this.column2Cards[cardIndex])
                 this.column2Cards.splice(cardIndex, 1)
                 this.countColumnCard2 -= 1
+                newCard.timeEnd = new Date().toLocaleString()
             }
-        }
+            this.saveDataToLocalStorage()
+        },
+        saveDataToLocalStorage() {
+            const dataToStore = {
+                column1Cards: this.column1Cards,
+                column2Cards: this.column2Cards,
+                column3Cards: this.column3Cards,
+                countColumnCard1: this.countColumnCard1,
+                countColumnCard2: this.countColumnCard2,
+            }
+            localStorage.setItem('appData', JSON.stringify(dataToStore))
+        },
+    },
+    mounted() {
+        const storedData = JSON.parse(localStorage.getItem('appData'))
+        this.column1Cards = storedData.column1Cards
+        this.column2Cards = storedData.column2Cards
+        this.column3Cards = storedData.column3Cards
+        this.countColumnCard1 = storedData.countColumnCard1
+        this.countColumnCard2 = storedData.countColumnCard2
     }
 })
