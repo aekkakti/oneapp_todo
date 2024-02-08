@@ -17,6 +17,7 @@ new Vue({
                 let newCard = {cardName: this.cardName, tasks: [], taskName: ''}
                 this.column1Cards.push(newCard)
                 this.countColumnCard1 += 1
+                this.countTasks = 0
                 this.saveDataToLocalStorage()
             }
             else if (this.cardName === '') {
@@ -31,7 +32,7 @@ new Vue({
                 let newTask = {taskName: this.column1Cards[cardIndex].taskName, completeStyle: false}
                 this.column1Cards[cardIndex].tasks.push(newTask)
                 this.column1Cards[cardIndex].taskName = ''
-                this.countColumnCard1 += 1
+                this.countTasks += 1
                 this.saveDataToLocalStorage()
             }
             else if (this.column1Cards[cardIndex].taskName === '') {
@@ -45,17 +46,17 @@ new Vue({
             newCard.tasks[taskIndex].completeStyle =  !newCard.tasks[taskIndex].completeStyle
             const completedTasks = newCard.tasks.filter(task => task.completeStyle)
             this.completeTaskPercent = 100 / newCard.tasks.length * completedTasks.length
-            if (this.completeTaskPercent >= 50 && this.countColumnCard2 < 5) {
-                this.column2Cards.push(this.column1Cards[cardIndex])
-                this.column1Cards.splice(cardIndex, 1)
-                this.countColumnCard1 -= 1
-                this.countColumnCard2 += 1
-            }
             if (this.completeTaskPercent === 100) {
                 this.column3Cards.push(this.column2Cards[cardIndex])
                 this.column2Cards.splice(cardIndex, 1)
                 this.countColumnCard2 -= 1
                 newCard.timeEnd = new Date().toLocaleString()
+            }
+            if (this.completeTaskPercent >= 50 && this.countColumnCard2 < 5) {
+                this.column2Cards.push(this.column1Cards[cardIndex])
+                this.column1Cards.splice(cardIndex, 1)
+                this.countColumnCard1 -= 1
+                this.countColumnCard2 += 1
             }
             this.saveDataToLocalStorage()
         },
