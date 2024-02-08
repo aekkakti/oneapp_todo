@@ -27,14 +27,27 @@
                     <input v-model="newCard.taskName" type="text">
                     <button @click="addTask(index)">Добавить задачу</button>
                 </div>
+
         </div>
 
         <div class="column">
             <h2 class="t-a-c">В моменте</h2>
+            <div v-for="(newCard, index) in column2Cards">
+                <p>{{newCard.cardName}}</p>
+                <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
+                    <span @click="completeTask(newCard, taskIndex, index)"  :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
+                </li>
+            </div>
         </div>
 
         <div class="column">
             <h2 class="t-a-c">Выполнено</h2>
+            <div v-for="(newCard, index) in column3Cards">
+                <p>{{newCard.cardName}}</p>
+                <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
+                    <span :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
+                </li>
+            </div>
         </div>
 
     </div>
