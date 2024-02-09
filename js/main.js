@@ -35,7 +35,6 @@ new Vue({
                 this.column1Cards[cardIndex].tasks.push(newTask)
                 this.column1Cards[cardIndex].taskName = ''
                 this.countTasks += 1
-                this.saveDataToLocalStorage()
             }
             else if (this.column1Cards[cardIndex].taskName === '') {
                 alert('Нельзя создавать пустую задачу!')
@@ -43,15 +42,17 @@ new Vue({
             else {
                 alert('Максимум можно добавить только 5 задач!')
             }
+            this.saveDataToLocalStorage()
         },
         completeTask(newCard, taskIndex, cardIndex) {
             newCard.tasks[taskIndex].completeStyle =  !newCard.tasks[taskIndex].completeStyle
             const completedTasks = newCard.tasks.filter(task => task.completeStyle)
             this.completeTaskPercent = 100 / newCard.tasks.length * completedTasks.length
-            if (this.completeTaskPercent === 100) {
+            if (this.completeTaskPercent === 100 && !this.isFirstColumnBlocked) {
                 this.countColumnCard2 -= 1
                 this.column3Cards.push(this.column2Cards[cardIndex])
                 this.column2Cards.splice(cardIndex, 1)
+                this.isFirstColumnBlocked = false
                 newCard.timeEnd = new Date().toLocaleString()
             }
             else if (this.completeTaskPercent >= 50 && this.countColumnCard2 < 5 && !this.isFirstColumnBlocked) {
@@ -59,6 +60,10 @@ new Vue({
                 this.countColumnCard2 += 1
                 this.column2Cards.push(this.column1Cards[cardIndex])
                 this.column1Cards.splice(cardIndex, 1)
+                this.isFirstColumnBlocked = false
+            }
+            if (this.countColumnCard2 === 5 && this.completeTaskPercent >= 50) {
+                this.isFirstColumnBlocked = true
             }
             this.saveDataToLocalStorage()
         },
