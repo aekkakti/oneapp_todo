@@ -6,6 +6,6 @@
 Клонирование репозитория:
 
 ```bash
-   git clone https://github.com/aekkakti/client-practice-1.2
+   git clone https://github.com/aekkakti/oneapp_todo
 
 ```
