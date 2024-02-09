@@ -24,8 +24,8 @@
                 <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
                     <span @click="completeTask(newCard, taskIndex, index)" :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
                 </li>
-                <input v-model="newCard.taskName" type="text"><br>
-                <button :disabled="isFirstColumnBlocked" @click="addTask(index)">Добавить задачу</button>
+                <input v-model="newCard.taskName" type="text" class="addCardInput"><br><br>
+                <button :disabled="isFirstColumnBlocked" @click="addTask(index)" class="addTaskButton">Добавить задачу</button>
             </div>
 
         </div>
@@ -47,7 +47,7 @@
                 <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
                     <span :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
                 </li>
-                <p> Время закрытия карточки: {{ newCard.timeEnd }}</p>
+                <p> Время закрытия карточки: <b>{{ newCard.timeEnd }}</b></p>
             </div>
         </div>
 
