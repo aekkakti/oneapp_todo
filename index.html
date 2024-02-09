@@ -14,7 +14,7 @@
 
 <div id="todo">
     <div class="columns">
-        <div class="column">
+        <div class="column d-f f-d-c a-i-c">
             <h2 class="t-a-c">Принято в работу</h2>
             <input v-model="cardName" type="text" class="addCardInput"><br><br>
             <button :disabled="isFirstColumnBlocked" @click="addCard()" class="addCardButton">Добавить карточку</button>
@@ -24,13 +24,13 @@
                 <li v-for="(newTask, taskIndex) in newCard.tasks" :key="taskIndex">
                     <span @click="completeTask(newCard, taskIndex, index)" :disabled="isFirstColumnBlocked" :class="{'completeStyle' : newTask.completeStyle }">{{ newTask.taskName }} <br><br></span>
                 </li>
-                <input v-model="newCard.taskName" type="text">
+                <input v-model="newCard.taskName" type="text"><br>
                 <button :disabled="isFirstColumnBlocked" @click="addTask(index)">Добавить задачу</button>
             </div>
 
         </div>
 
-        <div class="column">
+        <div class="column d-f f-d-c a-i-c">
             <h2 class="t-a-c">В моменте</h2>
             <div v-if="newCard" v-for="(newCard, index) in this.column2Cards">
                 <p>{{newCard.cardName}}</p>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="column">
+        <div class="column d-f f-d-c a-i-c">
             <h2 class="t-a-c">Выполнено</h2>
             <div v-for="(newCard, index) in this.column3Cards">
                 <p>{{ newCard.cardName }}</p>

@@ -19,6 +19,7 @@ new Vue({
                 this.cardName = ''
                 this.column1Cards.push(newCard)
                 this.countColumnCard1 += 1
+                this.countTasks = 0
                 this.saveDataToLocalStorage()
             }
             else if (this.cardName === '') {
@@ -58,12 +59,6 @@ new Vue({
                 this.countColumnCard2 += 1
                 this.column2Cards.push(this.column1Cards[cardIndex])
                 this.column1Cards.splice(cardIndex, 1)
-            }
-            if (this.countColumnCard2 > 0) {
-                this.isFirstColumnBlocked = true
-            }
-            else if (this.countColumnCard2 === 5 && this.completeTaskPercent >= 50) {
-                this.isFirstColumnBlocked = true
             }
             this.saveDataToLocalStorage()
         },

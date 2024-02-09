@@ -16,6 +16,18 @@ button {
     cursor: pointer;
 }
 
+.d-f {
+    display: flex;
+}
+
+.f-d-c {
+    flex-direction: column;
+}
+
+.a-i-c {
+    align-items: center;
+}
+
 .fs-32pt {
     font-size: 32pt;
 }
